@@ -93,3 +93,33 @@ def delete_task(task_id: str):
 
     save_tasks(updated)
     return RedirectResponse(url="/", status_code=303)
+
+# Rota GET "/tasks/{task_id}/edit" — mostra o formulário de edição preenchido.
+@router.get("/tasks/{task_id}/edit")
+def edit_task_form(request: Request, task_id: str):
+    tasks = read_tasks()
+    # Procura a tarefa pelo ID
+    task = next((t for t in tasks if t["id"] == task_id), None)
+    if task is None:
+        raise HTTPException(status_code=404, detail="Tarefa não encontrada")
+    return templates.TemplateResponse(
+        request=request,
+        name="edit.html",
+        context={"task": task}
+    )
+
+
+# Rota POST "/tasks/{task_id}/edit" — recebe os dados do formulário e atualiza a tarefa.
+@router.post("/tasks/{task_id}/edit")
+def update_task(
+    task_id: str,
+    title: str = Form(...),
+    description: str = Form(None)
+):
+    tasks = read_tasks()
+    for task in tasks:
+        if task["id"] == task_id:
+            task["title"] = title
+            task["description"] = description
+    save_tasks(tasks)
+    return RedirectResponse(url="/", status_code=303)

@@ -20,3 +20,6 @@ services:
     # Sem o volume, os dados sumiriam toda vez que o container fosse reiniciado.
     volumes:
       - ./dados:/app/dados
+      - ./static:/app/static
+      - ./templates:/app/templates
+      - ./app:/app/app

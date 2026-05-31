@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tod-API</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css?v=2">
 </head>
 <body>
     <div class="container">
@@ -34,6 +34,7 @@
                     <span class="description">{{ task.description }}</span>
                 </div>
                 <div class="task-actions">
+                    <a href="/tasks/{{ task.id }}/edit" class="btn-edit">Editar</a>
                     <a href="/tasks/{{ task.id }}/done" class="btn-done">Concluir</a>
                     <a href="/tasks/{{ task.id }}/delete" class="btn-delete">Deletar</a>
                 </div>
@@ -52,6 +53,7 @@
                     <span class="description">{{ task.description }}</span>
                 </div>
                 <div class="task-actions">
+                    <a href="/tasks/{{ task.id }}/edit" class="btn-edit">Editar</a>
                     <a href="/tasks/{{ task.id }}/done" class="btn-desfazer">Desfazer</a>
                     <a href="/tasks/{{ task.id }}/delete" class="btn-delete">Deletar</a>
                 </div>

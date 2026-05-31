@@ -6,7 +6,7 @@ API REST de tarefas (to-do list) construída com **FastAPI**, com interface web 
 
 ## Funcionalidades
 
-- Criar, listar, concluir e deletar tarefas
+- Criar, listar, editar, concluir e deletar tarefas
 - Interface web com formulário de entrada
 - Separação visual entre tarefas pendentes e concluídas
 - Contador de tarefas concluídas
@@ -41,7 +41,8 @@ tod-api/
 ├── static/
 │   └── style.css      # Estilização da interface
 ├── templates/
-│   └── index.html     # Página principal
+│   ├── index.html     # Página principal
+│   └── edit.html      # Formulário de edição de tarefa
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt
@@ -75,21 +76,9 @@ python -m uvicorn app.main:app --reload
 | GET | `/` | Página HTML com a lista de tarefas |
 | GET | `/tasks` | Retorna todas as tarefas em JSON |
 | POST | `/tasks` | Cria uma nova tarefa |
+| GET | `/tasks/{id}/edit` | Exibe o formulário de edição |
+| POST | `/tasks/{id}/edit` | Atualiza título e descrição da tarefa |
 | GET | `/tasks/{id}/done` | Alterna o status de concluída |
 | GET | `/tasks/{id}/delete` | Remove uma tarefa |
 | GET | `/docs` | Documentação interativa (Swagger) |
 
----
-
-## Próximas melhorias
-
-- [ ] Rota de edição de tarefas (PUT)
-- [ ] Migração do JSON para banco de dados (SQLite + SQLAlchemy)
-- [ ] Filtros (pendentes / concluídas)
-- [ ] Testes automatizados
-
----
-
-## Autor
-
-Projeto desenvolvido para fins de estudo em **Python**, **FastAPI** e **Docker**.
