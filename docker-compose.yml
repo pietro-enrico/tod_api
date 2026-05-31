@@ -1,0 +1,22 @@
+# Orquestra como o container da Tod-API sobe.
+
+version: "3.9"
+
+services:
+  # Nome do serviço — usado para referenciar o container em outros serviços
+  tod-api:
+
+    # Constrói a imagem usando o Dockerfile da pasta atual.
+    # Equivalente a rodar: docker build -t tod-api .
+    build: .
+
+    # Você acessa localhost:8000 e o Docker redireciona para a porta 8000 do container.
+    ports:
+      - "8000:8000"
+
+    # Volumes sincronizam pastas entre seu computador e o container.
+    # Formato: "./pasta_local:/caminho_dentro_do_container"
+    # Isso garante que os dados do JSON persistam mesmo após o container parar.
+    # Sem o volume, os dados sumiriam toda vez que o container fosse reiniciado.
+    volumes:
+      - ./dados:/app/dados

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tod-API</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Minhas Tarefas</h1>
+
+        <div class="counter">
+            {{ tasks | selectattr("done", "equalto", true) | list | length }}
+            de {{ tasks | length }} tarefas concluídas
+        </div>
+
+        <form action="/tasks" method="post" class="form">
+            <input type="text" name="title" placeholder="Título da tarefa" required>
+            <input type="text" name="description" placeholder="Descrição (opcional)">
+            <button type="submit">Adicionar</button>
+        </form>
+
+        {% set pendentes = tasks | selectattr("done", "equalto", false) | list %}
+        {% set concluidas = tasks | selectattr("done", "equalto", true) | list %}
+
+        {% if pendentes %}
+        <h2 class="section-title">Pendentes</h2>
+        <ul class="task-list">
+            {% for task in pendentes %}
+            <li class="task-item">
+                <div class="task-info">
+                    <span class="title">{{ task.title }}</span>
+                    <span class="description">{{ task.description }}</span>
+                </div>
+                <div class="task-actions">
+                    <a href="/tasks/{{ task.id }}/done" class="btn-done">Concluir</a>
+                    <a href="/tasks/{{ task.id }}/delete" class="btn-delete">Deletar</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if concluidas %}
+        <h2 class="section-title concluidas-title">Concluídas</h2>
+        <ul class="task-list">
+            {% for task in concluidas %}
+            <li class="task-item done">
+                <div class="task-info">
+                    <span class="title">{{ task.title }}</span>
+                    <span class="description">{{ task.description }}</span>
+                </div>
+                <div class="task-actions">
+                    <a href="/tasks/{{ task.id }}/done" class="btn-desfazer">Desfazer</a>
+                    <a href="/tasks/{{ task.id }}/delete" class="btn-delete">Deletar</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    </div>
+</body>
+</html>
