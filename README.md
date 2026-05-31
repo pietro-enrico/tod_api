@@ -11,7 +11,6 @@ API REST de tarefas (to-do list) construída com **FastAPI**, com interface web 
 - Separação visual entre tarefas pendentes e concluídas
 - Contador de tarefas concluídas
 - Persistência dos dados em arquivo JSON
-- Documentação automática da API via Swagger (`/docs`)
 
 ---
 
